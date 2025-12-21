@@ -26,7 +26,7 @@ public class OpenAIClient {
     private static final String BASE_URL = "https://api-inference.modelscope.cn/v1";
     
     // 模型名称
-    private static final String MODEL_NAME = "gpt-3.5-turbo";
+    private static final String MODEL_NAME = "Qwen/Qwen3-Next-80B-A3B-Instruct";
     
     // Gson实例，用于JSON序列化和反序列化
     private final Gson gson;
@@ -97,6 +97,10 @@ public class OpenAIClient {
                     response.append(line);
                 }
             }
+            
+            // 打印响应，用于调试
+            System.out.println("OpenAI API响应码：" + responseCode);
+            System.out.println("OpenAI API响应内容：" + response.toString());
             
             // 解析响应
             if (responseCode == HttpURLConnection.HTTP_OK) {

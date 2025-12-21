@@ -8,7 +8,7 @@ import com.ascent.bean.Product;
 import com.ascent.bean.User;
 
 /**
- * Õâ¸öÀàÊÇsocketÁ¬½ÓµÄ´¦ÀíÆ÷ ÀıÈç£º
+ * å¤„ç†socketè¿æ¥çš„çº¿ç¨‹ç±» ä¾‹å¦‚:
  * <pre>
  * Handler aHandler = new Handler(clientSocket, myProductDataAccessor);
  * aHandler.start();
@@ -29,10 +29,10 @@ public class Handler extends Thread implements ProtocolPort {
 	protected boolean done;
 
 	/**
-	 * ´øÁ½¸ö²ÎÊıµÄ¹¹Ôì·½·¨
-	 * @param theClientSocket ¿Í»§¶ËSocket¶ÔÏó
-	 * @param theProductDataAccessor ´¦ÀíÉÌÆ·Êı¾İµÄ¶ÔÏó
-	 * @throws IOException ¹¹Ôì¶ÔÏóÊ±¿ÉÄÜ·¢ÉúIOExceptionÒì³£
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ì·½ï¿½ï¿½
+	 * @param theClientSocket ï¿½Í»ï¿½ï¿½ï¿½Socketï¿½ï¿½ï¿½ï¿½
+	 * @param theProductDataAccessor ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½İµÄ¶ï¿½ï¿½ï¿½
+	 * @throws IOException ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ü·ï¿½ï¿½ï¿½IOExceptionï¿½ì³£
 	 */
 	public Handler(Socket theClientSocket,ProductDataAccessor theProductDataAccessor) throws IOException {
 		clientSocket = theClientSocket;
@@ -43,7 +43,7 @@ public class Handler extends Thread implements ProtocolPort {
 	}
 
 	/**
-	 * Ö´ĞĞ¶àÏß³ÌµÄrun()·½·¨£¬´¦Àí¿Í»§¶Ë·¢ËÍµÄÃüÁî
+	 * Ö´ï¿½Ğ¶ï¿½ï¿½ß³Ìµï¿½run()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½Ë·ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public void run() {
@@ -51,7 +51,7 @@ public class Handler extends Thread implements ProtocolPort {
 		try {
 			while (!done) {
 
-				log("µÈ´ıÃüÁî...");
+				log("ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½...");
 
 				int opCode = inputFromClient.readInt();
 				log("opCode = " + opCode);
@@ -70,7 +70,7 @@ public class Handler extends Thread implements ProtocolPort {
 					opAddUser();
 					break;
 				default:
-					System.out.println("´íÎó´úÂë");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 				}
 			}
 		} catch (IOException exc) {
@@ -79,7 +79,7 @@ public class Handler extends Thread implements ProtocolPort {
 	}
 
 	/**
-	 * ·µ»ØÓÃ»§ĞÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
 	 */
 	private void opGetUsers() {
 		try {
@@ -87,65 +87,65 @@ public class Handler extends Thread implements ProtocolPort {
 			outputToClient.writeObject(userTable);
 			outputToClient.flush();
 		} catch (IOException exe) {
-			log("·¢ÉúÒì³££º" + exe);
+			log("ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½" + exe);
 		}
 	}
 
 	/**
-	 * ·µ»Ø·ÖÀàÃû³Æ
+	 * ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	protected void opGetProductCategories() {
 		try {
 			ArrayList<String> categoryList = myProductDataAccessor.getCategories();
 			outputToClient.writeObject(categoryList);
 			outputToClient.flush();
-			log("·¢³ö " + categoryList.size() + " Àà±ğĞÅÏ¢µ½¿Í»§¶Ë");
+			log("ï¿½ï¿½ï¿½ï¿½ " + categoryList.size() + " ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½");
 		} catch (IOException exc) {
-			log("·¢ÉúÒì³£:  " + exc);
+			log("ï¿½ï¿½ï¿½ï¿½ï¿½ì³£:  " + exc);
 		}
 	}
 
 	/**
-	 * ·µ»ØÄ³¸ö·ÖÀàÃû³ÆµÄËùÓĞÉÌÆ·
+	 * ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 	 */
 	protected void opGetProducts() {
 		try {
-			log("¶ÁÈ¡·İÀàĞÅÏ¢");
+			log("ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢");
 			String category = (String) inputFromClient.readObject();
-			log("Àà±ğÊÇ " + category);
+			log("ï¿½ï¿½ï¿½ï¿½ï¿½ " + category);
 
 			ArrayList<Product> recordingList = myProductDataAccessor.getProducts(category);
 
 			outputToClient.writeObject(recordingList);
 			outputToClient.flush();
-			log("·¢³ö " + recordingList.size() + "¸ö²úÆ·ĞÅÏ¢µ½¿Í»§¶Ë.");
+			log("ï¿½ï¿½ï¿½ï¿½ " + recordingList.size() + "ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½.");
 		} catch (IOException exc) {
-			log("·¢ÉúÒì³£:  " + exc);
+			log("ï¿½ï¿½ï¿½ï¿½ï¿½ì³£:  " + exc);
 			exc.printStackTrace();
 		} catch (ClassNotFoundException exc) {
-			log("·¢ÉúÒì³£:  " + exc);
+			log("ï¿½ï¿½ï¿½ï¿½ï¿½ì³£:  " + exc);
 			exc.printStackTrace();
 		}
 	}
 
 	/**
-	 * ´¦ÀíÓÃ»§×¢²á
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½×¢ï¿½ï¿½
 	 */
 	public void opAddUser() {
 		try {
 			User user = (User) this.inputFromClient.readObject();
 			this.myProductDataAccessor.save(user);
 		} catch (IOException e) {
-			log("·¢ÉúÒì³£:  " + e);
+			log("ï¿½ï¿½ï¿½ï¿½ï¿½ì³£:  " + e);
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			log("·¢ÉúÒì³£:  " + e);
+			log("ï¿½ï¿½ï¿½ï¿½ï¿½ì³£:  " + e);
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * ´¦ÀíÏß³ÌÔËĞĞÊ±±êÖ¾
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ö¾
 	 * @param flag
 	 */
 	public void setDone(boolean flag) {
@@ -153,11 +153,11 @@ public class Handler extends Thread implements ProtocolPort {
 	}
 
 	/**
-	 * ´òÓ¡ĞÅÏ¢µ½¿ØÖÆÌ¨
+	 * ï¿½ï¿½Ó¡ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
 	 * @param msg
 	 */
 	protected void log(Object msg) {
-		System.out.println("´¦ÀíÆ÷: " + msg);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: " + msg);
 	}
 
 }

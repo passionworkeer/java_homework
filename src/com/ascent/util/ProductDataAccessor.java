@@ -6,7 +6,7 @@ import com.ascent.bean.Product;
 import com.ascent.bean.User;
 
 /**
- * ²úÆ·Êı¾İ¶ÁÈ¡µÄÊµÏÖÀà
+ * äº§å“æ•°æ®è®¿é—®å™¨å®ç°ç±»
  * @author ascent
  * @version 1.0
  */
@@ -14,43 +14,43 @@ public class ProductDataAccessor extends DataAccessor {
 
 	// ////////////////////////////////////////////////////
 	//
-	// ²úÆ·ÎÄ¼ş¸ñÊ½ÈçÏÂ
-	// ²úÆ·Ãû³Æ,»¯Ñ§ÎÄÕªµÇ¼ÇºÅ,½á¹¹Í¼,¹«Ê½,¼Û¸ñ,ÊıÁ¿,Àà±ğ
+	// äº§å“æ–‡ä»¶æ ¼å¼è¯´æ˜
+	// äº§å“åç§°,åŒ–å­¦è¯å“ç¼–å·,ç»“æ„å›¾,åˆ†å­å¼,ä»·æ ¼,åº“å­˜,åˆ†ç±»
 	// ----------------------------------------------------
 	//
 	// ////////////////////////////////////////////////////
 
 	// ////////////////////////////////////////////////////
 	//
-	// ÓÃ»§ÎÄ¼ş¸ñÊ½ÈçÏÂ
-	// ÓÃ»§ÕÊºÅ,ÓÃ»§ÃÜÂë,ÓÃ»§È¨ÏŞ
+	// ç”¨æˆ·æ–‡ä»¶æ ¼å¼è¯´æ˜
+	// ç”¨æˆ·å,ç”¨æˆ·å¯†ç ,ç”¨æˆ·æƒé™
 	// ----------------------------------------------------
 	//
 	// ////////////////////////////////////////////////////
 	/**
-	 * ÉÌÆ·ĞÅÏ¢Êı¾İÎÄ¼şÃû
+	 * äº§å“ä¿¡æ¯æ•°æ®æ–‡ä»¶å
 	 */
 	protected static final String PRODUCT_FILE_NAME = "product.db";
 
 	/**
-	 * ÓÃ»§ĞÅÏ¢Êı¾İÎÄ¼şÃû
+	 * ç”¨æˆ·ä¿¡æ¯æ•°æ®æ–‡ä»¶å
 	 */
 	protected static final String USER_FILE_NAME = "user.db";
 
 	/**
-	 * Êı¾İ¼ÇÂ¼µÄ·Ö¸î·û
+	 * æ•°æ®è®°å½•çš„åˆ†éš”ç¬¦
 	 */
 	protected static final String RECORD_SEPARATOR = "----------";
 
 	/**
-	 * Ä¬ÈÏ¹¹Ôì·½·¨
+	 * é»˜è®¤æ„é€ æ–¹æ³•
 	 */
 	public ProductDataAccessor() {
 		load();
 	}
 
 	/**
-	 * ¶ÁÈ¡Êı¾İµÄ·½·¨
+	 * åŠ è½½æ•°æ®çš„æ–¹æ³•
 	 */
 	@Override
 	public void load() {
@@ -69,7 +69,7 @@ public class ProductDataAccessor extends DataAccessor {
 		String userName, password, authority;
 
 		try {
-			log("¶ÁÈ¡ÎÄ¼ş: " + PRODUCT_FILE_NAME + "...");
+			log("è¯»å–æ–‡ä»¶: " + PRODUCT_FILE_NAME + "...");
 			BufferedReader inputFromFile1 = new BufferedReader(new FileReader(PRODUCT_FILE_NAME));
 
 			while ((line = inputFromFile1.readLine()) != null) {
@@ -96,10 +96,10 @@ public class ProductDataAccessor extends DataAccessor {
 			}
 
 			inputFromFile1.close();
-			log("ÎÄ¼ş¶ÁÈ¡½áÊø!");
+			log("æ–‡ä»¶è¯»å–æˆåŠŸ!");
 
 			line = "";
-			log("¶ÁÈ¡ÎÄ¼ş: " + USER_FILE_NAME + "...");
+			log("è¯»å–æ–‡ä»¶: " + USER_FILE_NAME + "...");
 			BufferedReader inputFromFile2 = new BufferedReader(new FileReader(USER_FILE_NAME));
 			while ((line = inputFromFile2.readLine()) != null) {
 
@@ -116,27 +116,27 @@ public class ProductDataAccessor extends DataAccessor {
 			}
 
 			inputFromFile2.close();
-			log("ÎÄ¼ş¶ÁÈ¡½áÊø!");
-			log("×¼±¸¾ÍĞ÷!\n");
+			log("æ–‡ä»¶è¯»å–æˆåŠŸ!");
+			log("å‡†å¤‡å°±ç»ª!\n");
 		} catch (FileNotFoundException exc) {
-			log("Ã»ÓĞÕÒµ½ÎÄ¼ş: " + PRODUCT_FILE_NAME + " »ò "+USER_FILE_NAME+".");
+			log("æœªæ‰¾åˆ°æ–‡ä»¶: " + PRODUCT_FILE_NAME + " å’Œ "+USER_FILE_NAME+".");
 			log(exc);
 		} catch (IOException exc) {
-			log("¶ÁÈ¡ÎÄ¼ş·¢ÉúÒì³£: " + PRODUCT_FILE_NAME+ " »ò "+USER_FILE_NAME+".");
+			log("è¯»å–æ–‡ä»¶å‘ç”Ÿå¼‚å¸¸: " + PRODUCT_FILE_NAME+ " å’Œ "+USER_FILE_NAME+".");
 			log(exc);
 		}
 	}
 
 	/**
-	 * ·µ»Ø´øÓĞÕâĞ©²ÎÊıµÄÉÌÆ·¶ÔÏó
-	 * @param productName Ò©Æ·Ãû³Æ
-	 * @param cas »¯Ñ§ÎÄÕªµÇ¼ÇºÅ
-	 * @param structure ½á¹¹Í¼Ãû³Æ
-	 * @param formula ¹«Ê½
-	 * @param price ¼Û¸ñ
-	 * @param realstock ÊıÁ¿
-	 * @param category Àà±ğ
-	 * @return new Product(productName, cas, structure, formula, price, realstock, category);
+	 * è¿”å›äº§å“å¯¹è±¡çš„æ–¹æ³•
+	 * @param productName äº§å“åç§°
+	 * @param cas åŒ–å­¦è¯å“ç¼–å·
+	 * @param structure ç»“æ„å›¾åç§°
+	 * @param formula åˆ†å­å¼
+	 * @param price ä»·æ ¼
+	 * @param realstock åº“å­˜
+	 * @param category åˆ†ç±»
+	 * @return æ–°çš„Productå¯¹è±¡
 	 */
 	private Product getProductObject(String productName, String cas,
 			String structure, String formula, String price, String realstock, String category) {
@@ -144,11 +144,11 @@ public class ProductDataAccessor extends DataAccessor {
 	}
 
 	/**
-	 * ±£´æÊı¾İ
+	 * ä¿å­˜ç”¨æˆ·ä¿¡æ¯
 	 */
 	@Override
 	public void save(User user) {
-		log("¶ÁÈ¡ÎÄ¼ş: " + USER_FILE_NAME + "...");
+		log("è¯»å–æ–‡ä»¶: " + USER_FILE_NAME + "...");
 		try {
 			String userinfo = user.getUsername() + "," + user.getPassword() + "," + user.getAuthority();
 			RandomAccessFile fos = new RandomAccessFile(USER_FILE_NAME, "rws");
@@ -163,11 +163,11 @@ public class ProductDataAccessor extends DataAccessor {
 	}
 
 	/**
-	 * ÈÕÖ¾·½·¨.
+	 * æ—¥å¿—æ–¹æ³•.
 	 */
 	@Override
 	protected void log(Object msg) {
-		System.out.println("ProductDataAccessorÀà: " + msg);
+		System.out.println("ProductDataAccessor: " + msg);
 	}
 
 	@Override

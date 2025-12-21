@@ -4,8 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+
 /**
- * °¬Ë¹Ò½Ò©Ö÷¿ò¼Ü½çÃæ
+ * è‰¾æ–¯åŒ»è¯ç³»ç»Ÿä¸»ç•Œé¢
  * @author ascent
  * @version 1.0
  */
@@ -13,21 +14,21 @@ import java.awt.event.*;
 public class MainFrame extends JFrame {
 
 	/**
-	 * tabbed pane×é¼ş
+	 * æ ‡ç­¾é¡µé¢æ¿
 	 */
 	protected JTabbedPane tabbedPane;
 
 	/**
-	 * ²úÆ· panel
+	 * äº§å“é¢æ¿
 	 */
 	protected ProductPanel productPanel;
 
 	/**
-	 * Ä¬ÈÏ¹¹Ôì·½·¨
+	 * é»˜è®¤æ„é€ æ–¹æ³•
 	 */
 	public MainFrame() {
 
-		setTitle("»¶Ó­Ê¹ÓÃAscentSysÓ¦ÓÃ! ");
+		setTitle("æ¬¢è¿ä½¿ç”¨AscentSysåº”ç”¨! ");
 
 		Container container = this.getContentPane();
 		container.setLayout(new BorderLayout());
@@ -35,29 +36,29 @@ public class MainFrame extends JFrame {
 		tabbedPane = new JTabbedPane();
 
 		productPanel = new ProductPanel(this);
-		tabbedPane.addTab("Ò©Æ·", productPanel);
+		tabbedPane.addTab("äº§å“", productPanel);
 
 		container.add(BorderLayout.CENTER, tabbedPane);
 
 		JMenuBar myMenuBar = new JMenuBar();
 
-		JMenu fileMenu = new JMenu("ÎÄ¼ş");
+		JMenu fileMenu = new JMenu("æ–‡ä»¶");
 
-		JMenu openMenu = new JMenu("´ò¿ª");
-		JMenuItem localMenuItem = new JMenuItem("±¾µØÓ²ÅÌ...");
+		JMenu openMenu = new JMenu("æ‰“å¼€");
+		JMenuItem localMenuItem = new JMenuItem("æœ¬åœ°æ–‡ä»¶...");
 		openMenu.add(localMenuItem);
 
-		JMenuItem networkMenuItem = new JMenuItem("ÍøÂç...");
+		JMenuItem networkMenuItem = new JMenuItem("ç½‘ç»œ...");
 		openMenu.add(networkMenuItem);
 
-		JMenuItem webMenuItem = new JMenuItem("»¥ÁªÍø...");
+		JMenuItem webMenuItem = new JMenuItem("ç½‘é¡µ...");
 		openMenu.add(webMenuItem);
 		fileMenu.add(openMenu);
 
-		JMenuItem saveMenuItem = new JMenuItem("±£´æ");
+		JMenuItem saveMenuItem = new JMenuItem("ä¿å­˜");
 		fileMenu.add(saveMenuItem);
 
-		JMenuItem exitMenuItem = new JMenuItem("ÍË³ö");
+		JMenuItem exitMenuItem = new JMenuItem("é€€å‡º");
 		fileMenu.add(exitMenuItem);
 
 		myMenuBar.add(fileMenu);
@@ -66,13 +67,16 @@ public class MainFrame extends JFrame {
 
 		setupLookAndFeelMenu(myMenuBar);
 
-		JMenu helpMenu = new JMenu("°ïÖú");
-		JMenuItem aboutMenuItem = new JMenuItem("¹ØÓÚ");
+		JMenu helpMenu = new JMenu("å¸®åŠ©");
+		JMenuItem aboutMenuItem = new JMenuItem("å…³äº");
+		JMenuItem customerServiceMenuItem = new JMenuItem("æ™ºèƒ½å®¢æœ");
 		helpMenu.add(aboutMenuItem);
+		helpMenu.add(customerServiceMenuItem);
 
 		myMenuBar.add(helpMenu);
 
 		aboutMenuItem.addActionListener(new AboutActionListener());
+		customerServiceMenuItem.addActionListener(new CustomerServiceActionListener());
 
 		this.setJMenuBar(myMenuBar);
 
@@ -86,7 +90,7 @@ public class MainFrame extends JFrame {
 		helpMenu.setMnemonic('h');
 		aboutMenuItem.setMnemonic('a');
 
-		// Éè¶¨¿ì½İ¼ü
+		// è®¾ç½®å¿«æ·é”®
 		exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
 				ActionEvent.CTRL_MASK));
 
@@ -98,19 +102,19 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * Éè¶¨ºÍÑ¡ÔñÍâ¹Û
+	 * è®¾ç½®å¤–è§‚ä¸»é¢˜èœå•
 	 */
 	protected void setupLookAndFeelMenu(JMenuBar theMenuBar) {
 
 		UIManager.LookAndFeelInfo[] lookAndFeelInfo = UIManager
 				.getInstalledLookAndFeels();
-		JMenu lookAndFeelMenu = new JMenu("Ñ¡Ïî");
+		JMenu lookAndFeelMenu = new JMenu("å¤–è§‚");
 		JMenuItem anItem = null;
 		LookAndFeelListener myListener = new LookAndFeelListener();
 
 		try {
 			for (int i = 0; i < lookAndFeelInfo.length; i++) {
-				anItem = new JMenuItem(lookAndFeelInfo[i].getName() + " Íâ¹Û");
+				anItem = new JMenuItem(lookAndFeelInfo[i].getName() + " ä¸»é¢˜");
 				anItem.setActionCommand(lookAndFeelInfo[i].getClassName());
 				anItem.addActionListener(myListener);
 
@@ -123,7 +127,7 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * ÍË³ö·½·¨.
+	 * é€€å‡ºåº”ç”¨ç¨‹åº.
 	 */
 	public void exit() {
 		setVisible(false);
@@ -132,7 +136,7 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * "ÍË³ö"ÊÂ¼ş´¦ÀíÄÚ²¿Àà.
+	 * "é€€å‡º"äº‹ä»¶ç›‘å¬å™¨.
 	 */
 	class ExitActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
@@ -141,12 +145,12 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * ´¦Àí"¹Ø±Õ´°¿Ú"ÊÂ¼şµÄÄÚ²¿Àà.
+	 * çª—å£"å…³é—­"äº‹ä»¶ç›‘å¬å™¨.
 	 */
 	class WindowCloser extends WindowAdapter {
 
 		/**
-		 * let's call our exit() method defined above
+		 * è°ƒç”¨exit()æ–¹æ³•é€€å‡ºåº”ç”¨
 		 */
 		public void windowClosing(WindowEvent e) {
 			exit();
@@ -154,7 +158,7 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * ´¦Àí"Íâ¹Û"Ñ¡Ôñ¼àÌıÆ÷µÄÄÚ²¿Àà
+	 * "å¤–è§‚"é€‰æ‹©äº‹ä»¶ç›‘å¬å™¨
 	 */
 	class LookAndFeelListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
@@ -169,12 +173,23 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * ´¦Àí"¹ØÓÚ"²Ëµ¥¼àÌıÆ÷µÄÄÚ²¿Àà
+	 * "å…³äº"èœå•äº‹ä»¶ç›‘å¬å™¨
 	 */
 	class AboutActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
-			String msg = "³¬ÖµÏíÊÜ!";
+			String msg = "æ„Ÿè°¢ä½¿ç”¨!";
 			JOptionPane.showMessageDialog(MainFrame.this, msg);
+		}
+	}
+
+	/**
+	 * "æ™ºèƒ½å®¢æœ"èœå•äº‹ä»¶ç›‘å¬å™¨
+	 */
+	class CustomerServiceActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent event) {
+			// åˆ›å»ºå¹¶æ˜¾ç¤ºæ™ºèƒ½å®¢æœçª—å£
+			CustomerServiceFrame dialog = new CustomerServiceFrame(MainFrame.this);
+			dialog.setVisible(true);
 		}
 	}
 }

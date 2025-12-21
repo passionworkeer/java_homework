@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -25,7 +26,7 @@ import com.ascent.bean.Product;
 import com.ascent.util.ShoppingCart;
 
 /**
- * ÏÔÊ¾¹ºÎï³µËù¹ºÂòÉÌÆ·ĞÅÏ¢
+ * è´­ç‰©è½¦å¯¹è¯æ¡†ï¼Œæ˜¾ç¤ºè´­ç‰©è½¦ä¸­çš„äº§å“ä¿¡æ¯
  * @author ascent
  * @version 1.0
  */
@@ -43,12 +44,12 @@ public class ShoppingCartDialog extends JDialog {
 	private JLabel tipLabel;
 
 	/**
-	 * ´øÁ½¸ö²ÎÊıµÄ¹¹Ôì·½·¨
-	 * @param theParentFrame ¸¸´°Ìå
-	 * @param shoppingButton ²é¿´¹ºÎï³µ°´Å¥
+	 * æ„é€ æ–¹æ³•
+	 * @param theParentFrame çˆ¶çª—å£
+	 * @param shoppingButton æŸ¥çœ‹è´­ç‰©è½¦æŒ‰é’®
 	 */
 	public ShoppingCartDialog(Frame theParentFrame, JButton shoppingButton) {
-		super(theParentFrame, "¹ºÎï³µ", true);
+		super(theParentFrame, "è´­ç‰©è½¦", true);
 		textMap = new HashMap<String,JTextField>();
 		parentFrame = theParentFrame;
 		this.shoppingButton = shoppingButton;
@@ -57,7 +58,7 @@ public class ShoppingCartDialog extends JDialog {
 	}
 
 	/**
-	 * ¹¹½¨ÏÔÊ¾¹ºÎï³µÀïÉÌÆ·ĞÅÏ¢µÄ½çÃæ
+	 * æ˜¾ç¤ºè´­ç‰©è½¦ä¸­äº§å“ä¿¡æ¯çš„æ–¹æ³•
 	 */
 	public void lookShoppingCar() {
 		Container container = this.getContentPane();
@@ -89,13 +90,13 @@ public class ShoppingCartDialog extends JDialog {
 			c.gridy = c.gridy + 2;
 			String str = "";
 			product = shoppingList.get(i);
-			str = str + "²úÆ·Ãû£º" + product.getProductname() + "    ";
-			str = str + "CASºÅ£º" + product.getCas() + "    ";
-			str = str + "¹«Ê½£º" + product.getFormula() + "    ";
-			str = str + "Àà±ğ£º" + product.getCategory();
+			str = str + "äº§å“åç§°ï¼š" + product.getProductname() + "    ";
+			str = str + "CASå·ï¼š" + product.getCas() + "    ";
+			str = str + "åˆ†å­å¼ï¼š" + product.getFormula() + "    ";
+			str = str + "ç±»åˆ«ï¼š" + product.getCategory();
 			pruductLabel = new JLabel(str);
 			JPanel panel = new JPanel(new FlowLayout());
-			JLabel l = new JLabel("ÊıÁ¿£º");
+			JLabel l = new JLabel("è´­ä¹°æ•°é‡ï¼š");
 			JTextField jtf = new JTextField(7);
 			jtf.setText("1");
 			panel.add(pruductLabel);
@@ -109,9 +110,9 @@ public class ShoppingCartDialog extends JDialog {
 		container.add(BorderLayout.NORTH, infoPanel);
 
 		JPanel bottomPanel = new JPanel();
-		JButton okButton = new JButton("Ìá½»±íµ¥");
+		JButton okButton = new JButton("æäº¤è®¢å•");
 		bottomPanel.add(okButton);
-		JButton clearButton = new JButton("Çå¿Õ");
+		JButton clearButton = new JButton("æ¸…ç©º");
 		bottomPanel.add(clearButton);
 
 		container.add(BorderLayout.SOUTH, bottomPanel);
@@ -125,7 +126,7 @@ public class ShoppingCartDialog extends JDialog {
 	}
 
 	/**
-	 * ´¦Àí"OK"°´Å¥µÄÄÚ²¿Àà
+	 * "æäº¤è®¢å•"æŒ‰é’®ç›‘å¬å™¨
 	 * @author ascent
 	 */
 	class OkButtonActionListener implements ActionListener {
@@ -135,18 +136,18 @@ public class ShoppingCartDialog extends JDialog {
 			for (Object o : set) {
 				JTextField t = (JTextField) textMap.get((String) o);
 				if ("".equals(t.getText())) {
-					tipLabel.setText("ÇëÊäÈëÊıÁ¿");
+					tipLabel.setText("è´­ä¹°æ•°é‡ä¸èƒ½ä¸ºç©ºï¼");
 					return;
 				}
 			}
 			setVisible(false);
-			ShoppingMessageDialog myMessageDialog = new ShoppingMessageDialog(parentFrame);
+			ShoppingMessageDialog myMessageDialog = new ShoppingMessageDialog((JFrame)parentFrame, "è®¢å•æäº¤æˆåŠŸï¼");
 			myMessageDialog.setVisible(true);
 		}
 	}
 
 	/**
-	 * ´¦Àí"clear"°´Å¥µÄÄÚ²¿Àà
+	 * "æ¸…ç©º"æŒ‰é’®ç›‘å¬å™¨
 	 * @author ascent
 	 */
 	class ClearButtonActionListener implements ActionListener {

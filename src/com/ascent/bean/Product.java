@@ -1,42 +1,42 @@
 package com.ascent.bean;
 
 /**
- * ÊµÌåÀàProduct£¬ÓÃÀ´ÃèÊöÉÌÆ·µÄĞÅÏ¢Àà
+ * å®ç°ç±»Productï¼Œç”¨äºå°è£…äº§å“ä¿¡æ¯
  * @author ascent
  * @version 1.0
  */
 @SuppressWarnings("serial")
 public class Product implements java.lang.Comparable, java.io.Serializable {
 
-	private String productname; // Ò©Æ·Ãû³Æ
+	private String productname; // äº§å“åç§°
 
-	private String cas; // »¯Ñ§ÎÄÕªµÇ¼ÇºÅ
+	private String cas; // åŒ–å­¦è¯å“ç¼–å·
 
-	private String structure; // ½á¹¹Í¼Ãû³Æ
+	private String structure; // ç»“æ„å›¾åç§°
 
-	private String formula; // ¹«Ê½
+	private String formula; // åˆ†å­å¼
 
-	private String price; // ¼Û¸ñ
+	private String price; // ä»·æ ¼
 
-	private String realstock; // ÊıÁ¿
+	private String realstock; // åº“å­˜
 
-	private String category; // Àà±ğ
+	private String category; // åˆ†ç±»
 	
 	/**
-	 * Ä¬ÈÏ¹¹Ôì·½·¨
+	 * é»˜è®¤æ„é€ æ–¹æ³•
 	 */
 	public Product() {
 	}
 
 	/**
-	 * ´øËùÓĞ²ÎÊı¹¹Ôì·½·¨
-	 * @param productName Ò©Æ·Ãû³Æ
-	 * @param cas »¯Ñ§ÎÄÕªµÇ¼ÇºÅ
-	 * @param structure ½á¹¹Í¼Ãû³Æ
-	 * @param formula ¹«Ê½
-	 * @param price ¼Û¸ñ
-	 * @param realstock ÊıÁ¿
-	 * @param category Àà±ğ
+	 * å¸¦å‚æ•°çš„æ„é€ æ–¹æ³•
+	 * @param productName äº§å“åç§°
+	 * @param cas åŒ–å­¦è¯å“ç¼–å·
+	 * @param structure ç»“æ„å›¾åç§°
+	 * @param formula åˆ†å­å¼
+	 * @param price ä»·æ ¼
+	 * @param realstock åº“å­˜
+	 * @param category åˆ†ç±»
 	 */
 	public Product(String productName, String cas, String structure,
 			String formula, String price, String realstock, String category) {
@@ -149,7 +149,7 @@ public class Product implements java.lang.Comparable, java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return this.getProductname() + "    CAS£º" + this.getCas();
+		return this.getProductname() + "    CAS: " + this.getCas();
 	}
 
 	public int compareTo(Object o) {

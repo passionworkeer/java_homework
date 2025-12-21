@@ -1,93 +1,61 @@
 package com.ascent.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Point;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 /**
- * È·ÈÏ¹ºÂòÉÌÆ·ÌáÊ¾´°Ìå
+ * è´­ç‰©æ¶ˆæ¯å¯¹è¯æ¡†
  * @author ascent
  * @version 1.0
  */
 @SuppressWarnings("serial")
 public class ShoppingMessageDialog extends JDialog {
 
-	protected Frame parentFrame;
+    /**
+     * ä¸»é¢æ¿
+     */
+    protected JPanel mainPanel;
 
-	/**
-	 * ´øÒ»¸ö²ÎÊıµÄ¹¹Ôì·½·¨
-	 * @param theParentFrame ¸¸´°Ìå
-	 */
-	public ShoppingMessageDialog(Frame theParentFrame) {
-		super(theParentFrame, "¹ºÎïĞÅÏ¢", true);
-		parentFrame = theParentFrame;
-		shoppingMessage();
-	}
+    /**
+     * OKæŒ‰é’®
+     */
+    protected JButton okButton;
 
-	/**
-	 * ¹¹½¨µ¯³öÈ·ÈÏĞÅÏ¢´°Ìå
-	 */
-	public void shoppingMessage() {
-		Container container = this.getContentPane();
-		container.setLayout(new BorderLayout());
+    /**
+     * ä¿¡æ¯æ ‡ç­¾
+     */
+    protected JLabel messageLabel;
 
-		JPanel infoPanel = new JPanel();
-		infoPanel.setBorder(new EmptyBorder(10, 10, 0, 10));
-		infoPanel.setLayout(new GridBagLayout());
+    /**
+     * æ„é€ å‡½æ•°
+     * @param theParentFrame çˆ¶çª—å£
+     * @param message æ¶ˆæ¯å†…å®¹
+     */
+    public ShoppingMessageDialog(JFrame theParentFrame, String message) {
+        super(theParentFrame, "è´­ç‰©ä¿¡æ¯", true);
+        setSize(300, 200);
+        setLocationRelativeTo(theParentFrame);
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new GridLayout(2, 1));
+        messageLabel = new JLabel(message, JLabel.CENTER);
+        mainPanel.add(messageLabel);
+        JPanel buttonPanel = new JPanel();
+        okButton = new JButton("ç¡®å®š");
+        okButton.addActionListener(new OkButtonActionListener());
+        buttonPanel.add(okButton);
+        mainPanel.add(buttonPanel);
+        this.add(mainPanel);
+    }
 
-		GridBagConstraints c = new GridBagConstraints();
-
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridwidth = 3;
-		c.weightx = 0.0;
-		c.weighty = 0.0;
-		c.fill = GridBagConstraints.BOTH;
-		c.anchor = GridBagConstraints.WEST;
-		c.insets = new Insets(10, 0, 2, 10);
-
-		String str = "Äú¹ºÎïĞÅÏ¢ÒÑ¾­±£´æ£¬Ğ»Ğ»¡£";
-		JLabel pruductLabel = new JLabel(str);
-		pruductLabel.setForeground(Color.black);
-		infoPanel.add(pruductLabel, c);
-
-		container.add(BorderLayout.NORTH, infoPanel);
-
-		JPanel bottomPanel = new JPanel();
-		JButton okButton = new JButton("OK");
-		bottomPanel.add(okButton);
-
-		container.add(BorderLayout.SOUTH, bottomPanel);
-
-		okButton.addActionListener(new OkButtonActionListener());
-
-		setResizable(false);
-		this.pack();
-
-		Point parentLocation = parentFrame.getLocation();
-		this.setLocation(parentLocation.x + 50, parentLocation.y + 50);
-	}
-
-	/**
-	 * ´¦Àí"OK"°´Å¥µÄÄÚ²¿Àà
-	 * @author ascent
-	 */
-	class OkButtonActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent event) {
-			setVisible(false);
-		}
-	}
+    /**
+     * OKæŒ‰é’®äº‹ä»¶ç›‘å¬å™¨
+     */
+    class OkButtonActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            setVisible(false);
+            dispose();
+        }
+    }
 }

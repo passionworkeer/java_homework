@@ -1,15 +1,15 @@
 package com.ascent.ui;
 
 /**
- * Õâ¸öÀàÊÇ¿Í»§¶ËÆô¶¯Àà
+ * è‰¾æ–¯åŒ»è¯ç³»ç»Ÿå®¢æˆ·ç«¯ä¸»ç±»
  * @author ascent
  * @version 1.0
  */
 public class Ascentsys {
 
 	/**
-	 * Æô¶¯¿Í»§¶ËµÄÖ÷·½·¨
-	 * @param args ÎŞ
+	 * å¯åŠ¨å®¢æˆ·ç«¯åº”ç”¨ç¨‹åº
+	 * @param args å‘½ä»¤è¡Œå‚æ•°
 	 */
 	public static void main(String[] args) {
 		LoginFrame loginFrame = new LoginFrame();

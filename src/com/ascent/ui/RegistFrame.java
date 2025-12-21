@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import com.ascent.util.UserDataClient;
 
 /**
- * ÓÃ»§×¢²á´°Ìå
+ * ç”¨æˆ·æ³¨å†Œç•Œé¢
  * @author ascent
  * @version 1.0
  */
@@ -39,25 +39,25 @@ public class RegistFrame extends JFrame {
 	private UserDataClient userDataClient;
 
 	/**
-	 * Ä¬ÈÏ¹¹Ôì·½·¨£¬³õÊ¼»¯ÓÃ»§×¢²á´°Ìå
+	 * é»˜è®¤æ„é€ æ–¹æ³•ï¼Œåˆå§‹åŒ–ç”¨æˆ·æ³¨å†Œç•Œé¢
 	 */
 	public RegistFrame() {
-		this.setTitle("ÓÃ»§×¢²á");
+		this.setTitle("ç”¨æˆ·æ³¨å†Œ");
 
 		Container container = this.getContentPane();
 		container.setLayout(new BorderLayout());
 
 		JPanel registPanel = new JPanel();
 
-		JLabel userLabel = new JLabel("ÓÃ»§ÕÊºÅ£º");
-		JLabel passwordLabel = new JLabel("ÓÃ»§ÃÜÂë£º");
-		JLabel repasswordLabel = new JLabel("ÖØ¸´ÃÜÂë£º");
+		JLabel userLabel = new JLabel("ç”¨æˆ·è´¦å·ï¼š");
+		JLabel passwordLabel = new JLabel("ç”¨æˆ·å¯†ç ï¼š");
+		JLabel repasswordLabel = new JLabel("é‡å¤å¯†ç ï¼š");
 
 		userText = new JTextField(15);
 		password = new JPasswordField(15);
 		repassword = new JPasswordField(15);
-		JButton regist = new JButton("×¢²á");
-		JButton exitButton = new JButton("ÍË³ö");
+		JButton regist = new JButton("æ³¨å†Œ");
+		JButton exitButton = new JButton("é€€å‡º");
 
 		registPanel.add(userLabel);
 		registPanel.add(new JScrollPane(userText));
@@ -85,7 +85,7 @@ public class RegistFrame extends JFrame {
 		regist.addActionListener(new RegistActionListener());
 		repassword.addFocusListener(new MyFocusListener());
 		this.addWindowListener(new WindowCloser());
-		this.addWindowFocusListener(new WindowFocusListener() {// ÉèÖÃ¸¸´°¿Ú
+		this.addWindowFocusListener(new WindowFocusListener() {// è®¾ç½®çª—å£ç„¦ç‚¹
 					public void windowGainedFocus(WindowEvent e) {
 					}
 					public void windowLostFocus(WindowEvent e) {
@@ -100,7 +100,7 @@ public class RegistFrame extends JFrame {
 	}
 
 	/**
-	 * ÍË³ö°´Å¥ÊÂ¼ş¼àÌı
+	 * é€€å‡ºæŒ‰é’®äº‹ä»¶å¤„ç†
 	 * @author ascent
 	 */
 	class ExitActionListener implements ActionListener {
@@ -111,23 +111,23 @@ public class RegistFrame extends JFrame {
 	}
 
 	/**
-	 * ×¢²á°´Å¥ÊÂ¼ş¼àÌı
+	 * æ³¨å†ŒæŒ‰é’®äº‹ä»¶å¤„ç†
 	 * @author ascent
 	 */
 	class RegistActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			// ÓÃ»§×¢²á²Ù×÷
+			// ç”¨æˆ·æ³¨å†Œå¤„ç†
 			boolean bo = userDataClient.addUser(userText.getText(), new String(password.getPassword()));
 			if (bo) {
-				tip.setText("×¢²á³É¹¦£¡");
+				tip.setText("æ³¨å†ŒæˆåŠŸï¼");
 			} else {
-				tip.setText("ÓÃ»§ÃûÒÑ´æÔÚ£¡");
+				tip.setText("ç”¨æˆ·åå·²å­˜åœ¨ï¼");
 			}
 		}
 	}
 
 	/**
-	 * "¹Ø±Õ´°¿Ú"ÊÂ¼ş´¦ÀíÄÚ²¿Àà
+	 * "å…³é—­çª—å£"äº‹ä»¶å¤„ç†å†…éƒ¨ç±»
 	 * @author ascent
 	 */
 	class WindowCloser extends WindowAdapter {
@@ -138,7 +138,7 @@ public class RegistFrame extends JFrame {
 	}
 
 	/**
-	 * ÃÜÂë²»Ò»ÖÂ´¥·¢µÄÊÂ¼ş¼àÌıÆ÷´¦ÀíÀà
+	 * ä¸¤æ¬¡ä¸ä¸€è‡´å¯†ç äº‹ä»¶å¤„ç†å†…éƒ¨ç±»
 	 * @author ascent
 	 */
 	class MyFocusListener implements FocusListener {
@@ -149,11 +149,11 @@ public class RegistFrame extends JFrame {
 		public void focusLost(FocusEvent e) {
 			if (e.getSource().equals(password)) {
 				if (new String(password.getPassword()) == "" || new String(password.getPassword()) == null) {
-					tip.setText("ÃÜÂë²»ÄÜÎª¿Õ!");
+					tip.setText("å¯†ç ä¸èƒ½ä¸ºç©ºï¼");
 				}
 			} else if (e.getSource().equals(repassword)) {
-				if (!new String(password.getPassword()).equals(new String(password.getPassword()))) {
-					tip.setText("Á½´ÎÃÜÂë²»Ò»ÖÂ£¡");
+				if (!new String(password.getPassword()).equals(new String(repassword.getPassword()))) {
+					tip.setText("ä¸¤æ¬¡å¯†ç ä¸ä¸€è‡´ï¼");
 				}
 			} else {
 				tip.setText("");

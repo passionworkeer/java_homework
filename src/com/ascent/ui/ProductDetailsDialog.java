@@ -9,7 +9,7 @@ import com.ascent.bean.Product;
 import com.ascent.util.ShoppingCart;
 
 /**
- * Õâ¸öÀàÏÔÊ¾²úÆ·ÏêÏ¸ĞÅÏ¢¶Ô»°¿ò
+ * äº§å“è¯¦æƒ…ä¿¡æ¯å¯¹è¯æ¡†
  * @author ascent
  * @version 1.0
  */
@@ -23,23 +23,23 @@ public class ProductDetailsDialog extends JDialog {
 	protected JButton shoppingButton;
 
 	/**
-	 * ´øÈı¸ö²ÎÊıµÄ¹¹Ôì·½·¨
-	 * @param theParentFrame ¸¸´°Ìå
-	 * @param theProduct µ±Ç°²é¿´µÄÉÌÆ·¶ÔÏó
-	 * @param shoppingButton ¹ºÂò°´Å¥
+	 * æ„é€ æ–¹æ³•
+	 * @param theParentFrame çˆ¶çª—å£
+	 * @param theProduct å½“å‰æŸ¥çœ‹çš„äº§å“ä¿¡æ¯
+	 * @param shoppingButton è´­ç‰©è½¦æŒ‰é’®
 	 */
 	public ProductDetailsDialog(Frame theParentFrame, Product theProduct,
 			JButton shoppingButton) {
-		this(theParentFrame, "Ò©Æ·ÏêÏ¸ĞÅÏ¢ " + theProduct.getProductname(),
+		this(theParentFrame, "äº§å“è¯¦æƒ…ä¿¡æ¯ " + theProduct.getProductname(),
 				theProduct, shoppingButton);
 	}
 
 	/**
-	 * ´øËÄ¸ö²ÎÊıµÄ¹¹Ôì·½·¨
-	 * @param theParentFrame ¸¸´°Ìå
-	 * @param theTitle ´°Ìå±êÌâ
-	 * @param theProduct µ±Ç°²é¿´µÄÉÌÆ·¶ÔÏó
-	 * @param shoppingButton ¹ºÂò°´Å¥
+	 * æ„é€ æ–¹æ³•
+	 * @param theParentFrame çˆ¶çª—å£
+	 * @param theTitle å¯¹è¯æ¡†æ ‡é¢˜
+	 * @param theProduct å½“å‰æŸ¥çœ‹çš„äº§å“ä¿¡æ¯
+	 * @param shoppingButton è´­ç‰©è½¦æŒ‰é’®
 	 */
 	public ProductDetailsDialog(Frame theParentFrame, String theTitle,
 			Product theProduct, JButton shoppingButton) {
@@ -54,7 +54,7 @@ public class ProductDetailsDialog extends JDialog {
 	}
 
 	/**
-	 * ÓÃÀ´¹¹½¨ÏÔÊ¾ÉÌÆ·ĞÅÏ¢´°Ìå
+	 * æ„å»ºGUIç•Œé¢
 	 */
 	private void buildGui() {
 
@@ -79,26 +79,26 @@ public class ProductDetailsDialog extends JDialog {
 		c.fill = GridBagConstraints.BOTH;
 		c.anchor = GridBagConstraints.WEST;
 		c.insets = new Insets(10, 0, 2, 10);
-		JLabel artistLabel = new JLabel("²úÆ·Ãû:  " + myProduct.getProductname());
+		JLabel artistLabel = new JLabel("äº§å“åç§°:  " + myProduct.getProductname());
 		artistLabel.setForeground(Color.black);
 		infoPanel.add(artistLabel, c);
 
 		c.gridy = GridBagConstraints.RELATIVE;
 		c.insets = new Insets(2, 0, 10, 10);
-		JLabel titleLabel = new JLabel("CASºÅ:  " + myProduct.getCas());
+		JLabel titleLabel = new JLabel("CASå·:  " + myProduct.getCas());
 		titleLabel.setForeground(Color.black);
 		infoPanel.add(titleLabel, c);
 
-		JLabel categoryLabel = new JLabel("¹«Ê½:  " + myProduct.getFormula());
+		JLabel categoryLabel = new JLabel("åˆ†å­å¼:  " + myProduct.getFormula());
 		c.insets = new Insets(2, 0, 2, 0);
 		categoryLabel.setForeground(Color.black);
 		infoPanel.add(categoryLabel, c);
 
-		JLabel durationLabel = new JLabel("ÊıÁ¿:  " + myProduct.getRealstock());
+		JLabel durationLabel = new JLabel("åº“å­˜:  " + myProduct.getRealstock());
 		durationLabel.setForeground(Color.black);
 		infoPanel.add(durationLabel, c);
 
-		JLabel priceLabel = new JLabel("Àà±ğ£º " + myProduct.getCategory());
+		JLabel priceLabel = new JLabel("ç±»åˆ«:  " + myProduct.getCategory());
 		c.insets = new Insets(10, 0, 2, 0);
 		priceLabel.setForeground(Color.black);
 		infoPanel.add(priceLabel, c);
@@ -115,16 +115,16 @@ public class ProductDetailsDialog extends JDialog {
 		ImageIcon recordingIcon = null;
 		JLabel recordingLabel = null;
 
-		// ¶ÁÈ¡Í¼Æ¬
+		// è·å–å›¾ç‰‡
 		try {
 			if (imageName.trim().length() == 0) {
-				recordingLabel = new JLabel("  Í¼Æ¬²»´æÔÚ  ");
+				recordingLabel = new JLabel("  å›¾ç‰‡ä¸å­˜åœ¨  ");
 			} else {
 				recordingIcon = new ImageIcon(getClass().getResource("/images/" + imageName));
 				recordingLabel = new JLabel(recordingIcon);
 			}
 		} catch (Exception exc) {
-			recordingLabel = new JLabel("  Í¼Æ¬²»´æÔÚ  ");
+			recordingLabel = new JLabel("  å›¾ç‰‡ä¸å­˜åœ¨  ");
 		}
 
 		recordingLabel.setBorder(BorderFactory.createRaisedBevelBorder());
@@ -135,9 +135,9 @@ public class ProductDetailsDialog extends JDialog {
 		container.add(BorderLayout.NORTH, infoPanel);
 
 		JPanel bottomPanel = new JPanel();
-		JButton okButton = new JButton("OK");
+		JButton okButton = new JButton("ç¡®å®š");
 		bottomPanel.add(okButton);
-		JButton purchaseButton = new JButton("¹ºÂò");
+		JButton purchaseButton = new JButton("è´­ä¹°");
 		bottomPanel.add(purchaseButton);
 		container.add(BorderLayout.SOUTH, bottomPanel);
 
@@ -151,7 +151,7 @@ public class ProductDetailsDialog extends JDialog {
 	}
 
 	/**
-	 * ´¦Àí"OK"°´Å¥µÄÄÚ²¿Àà
+	 * "ç¡®å®š"æŒ‰é’®ç›‘å¬å™¨
 	 */
 	class OkButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
@@ -160,7 +160,7 @@ public class ProductDetailsDialog extends JDialog {
 	}
 
 	/**
-	 * ´¦Àí"¹ºÂò"°´Å¥µÄÄÚ²¿Àà
+	 * "è´­ä¹°"æŒ‰é’®ç›‘å¬å™¨
 	 */
 	class PurchaseButtonActionListener implements ActionListener {
 		ShoppingCart shoppingCar = new ShoppingCart();

@@ -1,5 +1,7 @@
 package com.ascent.ui;
 
+import javax.swing.SwingUtilities;
+
 /**
  * 艾斯医药系统客户端主类
  * @author ascent
@@ -12,7 +14,12 @@ public class Ascentsys {
 	 * @param args 命令行参数
 	 */
 	public static void main(String[] args) {
-		LoginFrame loginFrame = new LoginFrame();
-		loginFrame.setVisible(true);
+		// 使用SwingUtilities.invokeLater()确保GUI组件在事件调度线程中初始化和显示
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				LoginFrame loginFrame = new LoginFrame();
+				loginFrame.setVisible(true);
+			}
+		});
 	}
 }

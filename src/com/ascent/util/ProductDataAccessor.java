@@ -73,26 +73,30 @@ public class ProductDataAccessor extends DataAccessor {
 			BufferedReader inputFromFile1 = new BufferedReader(new FileReader(PRODUCT_FILE_NAME));
 
 			while ((line = inputFromFile1.readLine()) != null) {
+				try {
+					st = new StringTokenizer(line, ",");
+					if (st.countTokens() >= 7) {
+						productName = st.nextToken().trim();
+						cas = st.nextToken().trim();
+						structure = st.nextToken().trim();
+						formula = st.nextToken().trim();
+						price = st.nextToken().trim();
+						realstock = st.nextToken().trim();
+						category = st.nextToken().trim();
 
-				st = new StringTokenizer(line, ",");
+						productObject = getProductObject(productName, cas, structure,formula, price, realstock, category);
 
-				productName = st.nextToken().trim();
-				cas = st.nextToken().trim();
-				structure = st.nextToken().trim();
-				formula = st.nextToken().trim();
-				price = st.nextToken().trim();
-				realstock = st.nextToken().trim();
-				category = st.nextToken().trim();
-
-				productObject = getProductObject(productName, cas, structure,formula, price, realstock, category);
-
-				if (dataTable.containsKey(category)) {
-					productArrayList = dataTable.get(category);
-				} else {
-					productArrayList = new ArrayList<Product>();
-					dataTable.put(category, productArrayList);
+						if (dataTable.containsKey(category)) {
+							productArrayList = dataTable.get(category);
+						} else {
+							productArrayList = new ArrayList<Product>();
+							dataTable.put(category, productArrayList);
+						}
+						productArrayList.add(productObject);
+					}
+				} catch (NoSuchElementException e) {
+					log("跳过格式错误的产品行: " + line);
 				}
-				productArrayList.add(productObject);
 			}
 
 			inputFromFile1.close();
@@ -102,16 +106,24 @@ public class ProductDataAccessor extends DataAccessor {
 			log("读取文件: " + USER_FILE_NAME + "...");
 			BufferedReader inputFromFile2 = new BufferedReader(new FileReader(USER_FILE_NAME));
 			while ((line = inputFromFile2.readLine()) != null) {
-
-				st = new StringTokenizer(line, ",");
-
-				userName = st.nextToken().trim();
-				password = st.nextToken().trim();
-				authority = st.nextToken().trim();
-				userObject = new User(userName, password, Integer.parseInt(authority));
-
-				if (!userTable.containsKey(userName)) {
-					userTable.put(userName, userObject);
+				try {
+					st = new StringTokenizer(line, ",");
+					if (st.countTokens() >= 3) {
+						userName = st.nextToken().trim();
+						password = st.nextToken().trim();
+						authority = st.nextToken().trim();
+						// 跳过空用户名
+						if (!userName.isEmpty()) {
+							userObject = new User(userName, password, Integer.parseInt(authority));
+							if (!userTable.containsKey(userName)) {
+								userTable.put(userName, userObject);
+							}
+						}
+					}
+				} catch (NoSuchElementException e) {
+					log("跳过格式错误的用户行: " + line);
+				} catch (NumberFormatException e) {
+					log("跳过权限格式错误的用户行: " + line);
 				}
 			}
 

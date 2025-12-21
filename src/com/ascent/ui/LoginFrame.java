@@ -108,26 +108,44 @@ public class LoginFrame extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			boolean bo = false;
+			System.out.println("开始登录验证...");
 			HashMap userTable = userDataClient.getUsers();
 			if (userTable != null) {
+				System.out.println("用户数据获取成功，用户数量: " + userTable.size());
+				System.out.println("尝试登录的用户名: " + userText.getText());
 				if (userTable.containsKey(userText.getText())) {
 					User userObject = (User) userTable.get(userText.getText());
 					char[] chr = password.getPassword();
 					String pwd = new String(chr);
+					System.out.println("输入的密码: " + pwd);
+					System.out.println("存储的密码: " + userObject.getPassword());
 					if (userObject.getPassword().equals(pwd)) {
 						bo = true;
+						System.out.println("密码匹配成功");
+					} else {
+						System.out.println("密码不匹配");
 					}
+				} else {
+					System.out.println("用户名不存在");
 				}
 				if (bo) {
+					System.out.println("登录成功，关闭连接");
 					userDataClient.closeSocKet();
+					System.out.println("隐藏登录窗口");
 					setVisible(false);
+					System.out.println("销毁登录窗口");
 					dispose();
+					System.out.println("创建主界面");
 					MainFrame myFrame = new MainFrame();
+					System.out.println("设置主界面可见");
 					myFrame.setVisible(true);
+					System.out.println("登录流程完成");
 				} else {
+					System.out.println("登录失败，显示错误提示");
 					tip.setText("账号密码错误，请重新输入。");
 				}
 			} else {
+				System.out.println("获取用户数据失败");
 				tip.setText("获取用户数据失败，请稍后再试。");
 			}
 		}

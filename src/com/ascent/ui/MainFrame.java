@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import com.ascent.bean.User;
 
 /**
  * 艾斯医药系统主界面
@@ -24,9 +25,40 @@ public class MainFrame extends JFrame {
 	protected ProductPanel productPanel;
 
 	/**
-	 * 默认构造方法
+	 * 当前登录用户
+	 */
+	protected User currentUser;
+
+	/**
+	 * 管理员权限常量
+	 */
+	private static final int ADMIN_AUTHORITY = 1;
+
+	/**
+	 * 普通用户权限常量
+	 */
+	private static final int USER_AUTHORITY = 0;
+
+	/**
+	 * 默认构造方法，用于测试
 	 */
 	public MainFrame() {
+		this(null);
+	}
+
+	/**
+	 * 带用户参数的构造方法
+	 * @param user 当前登录用户
+	 */
+	public MainFrame(User user) {
+		this.currentUser = user;
+		initUI();
+	}
+
+	/**
+	 * 初始化用户界面
+	 */
+	private void initUI() {
 
 		setTitle("欢迎使用AscentSys应用! ");
 
@@ -72,11 +104,18 @@ public class MainFrame extends JFrame {
 		JMenuItem customerServiceMenuItem = new JMenuItem("智能客服");
 		helpMenu.add(aboutMenuItem);
 		helpMenu.add(customerServiceMenuItem);
-
 		myMenuBar.add(helpMenu);
 
+		// 添加数据菜单
+		JMenu dataMenu = new JMenu("数据");
+		JMenuItem exportMenuItem = new JMenuItem("导出数据");
+		dataMenu.add(exportMenuItem);
+		myMenuBar.add(dataMenu);
+
+		// 设置菜单项的事件监听器
 		aboutMenuItem.addActionListener(new AboutActionListener());
 		customerServiceMenuItem.addActionListener(new CustomerServiceActionListener());
+		exportMenuItem.addActionListener(new ExportDataActionListener());
 
 		this.setJMenuBar(myMenuBar);
 
@@ -99,6 +138,39 @@ public class MainFrame extends JFrame {
 
 		aboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
 				ActionEvent.CTRL_MASK));
+		
+		// 根据用户权限显示/隐藏功能按钮
+		setupFunctionalityBasedOnAuthority();
+	}
+	
+	/**
+	 * 根据用户权限设置功能可用性
+	 */
+	private void setupFunctionalityBasedOnAuthority() {
+		// 如果没有用户信息（测试模式），默认使用普通用户权限
+		int authority = (currentUser != null) ? currentUser.getAuthority() : USER_AUTHORITY;
+		
+		System.out.println("当前用户权限: " + authority);
+		
+		// 示例：根据权限显示/隐藏菜单或功能按钮
+		// 这里可以根据实际需求添加更多的权限控制逻辑
+		
+		// 目前系统中主要的功能是产品查看和智能客服
+		// 假设管理员可以访问更多功能，普通用户只能查看产品和使用客服
+		
+		// 可以在后续扩展中添加更多权限控制，例如：
+		// - 管理员可以添加/编辑/删除产品
+		// - 管理员可以管理用户
+		// - 管理员可以查看销售报表
+		// - 普通用户只能查看产品和购买
+	}
+	
+	/**
+	 * 获取当前登录用户
+	 * @return 当前登录用户
+	 */
+	public User getCurrentUser() {
+		return currentUser;
 	}
 
 	/**
@@ -189,6 +261,17 @@ public class MainFrame extends JFrame {
 		public void actionPerformed(ActionEvent event) {
 			// 创建并显示智能客服窗口
 			CustomerServiceFrame dialog = new CustomerServiceFrame(MainFrame.this);
+			dialog.setVisible(true);
+		}
+	}
+	
+	/**
+	 * "导出数据"菜单事件监听器
+	 */
+	class ExportDataActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent event) {
+			// 创建并显示数据导出对话框
+			ExportDialog dialog = new ExportDialog(MainFrame.this);
 			dialog.setVisible(true);
 		}
 	}

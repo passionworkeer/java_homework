@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.ascent.util.UserDataClient;
+import com.ascent.util.EncryptionUtil;
 
 /**
  * 用户注册界面
@@ -116,8 +117,10 @@ public class RegistFrame extends JFrame {
 	 */
 	class RegistActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+			// 对密码进行加密处理
+			String encryptedPassword = EncryptionUtil.encryptPassword(new String(password.getPassword()));
 			// 用户注册处理
-			boolean bo = userDataClient.addUser(userText.getText(), new String(password.getPassword()));
+			boolean bo = userDataClient.addUser(userText.getText(), encryptedPassword);
 			if (bo) {
 				tip.setText("注册成功！");
 			} else {

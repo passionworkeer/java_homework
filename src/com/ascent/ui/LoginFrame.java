@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 
 import com.ascent.bean.User;
 import com.ascent.util.UserDataClient;
+import com.ascent.util.EncryptionUtil;
 
 /**
  * 用户登录窗口
@@ -108,18 +109,19 @@ public class LoginFrame extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			boolean bo = false;
+			User userObject = null;
 			System.out.println("开始登录验证...");
 			HashMap userTable = userDataClient.getUsers();
 			if (userTable != null) {
 				System.out.println("用户数据获取成功，用户数量: " + userTable.size());
 				System.out.println("尝试登录的用户名: " + userText.getText());
 				if (userTable.containsKey(userText.getText())) {
-					User userObject = (User) userTable.get(userText.getText());
+					userObject = (User) userTable.get(userText.getText());
 					char[] chr = password.getPassword();
 					String pwd = new String(chr);
 					System.out.println("输入的密码: " + pwd);
 					System.out.println("存储的密码: " + userObject.getPassword());
-					if (userObject.getPassword().equals(pwd)) {
+					if (EncryptionUtil.verifyPassword(pwd, userObject.getPassword())) {
 						bo = true;
 						System.out.println("密码匹配成功");
 					} else {
@@ -135,8 +137,8 @@ public class LoginFrame extends JFrame {
 					setVisible(false);
 					System.out.println("销毁登录窗口");
 					dispose();
-					System.out.println("创建主界面");
-					MainFrame myFrame = new MainFrame();
+					System.out.println("创建主界面，传递用户信息");
+					MainFrame myFrame = new MainFrame(userObject);
 					System.out.println("设置主界面可见");
 					myFrame.setVisible(true);
 					System.out.println("登录流程完成");
